@@ -1,0 +1,14 @@
+<h1>Edit task</h1>
+
+<form class="form-group" action="/task/:id/edit" method="post">
+  <input name="_method" type='hidden' value="patch">
+  <input type="hidden" name="task_id" value="<%=@task.id%>">
+  <input type="hidden" name="list_id" value="<%=@task.list%>">
+
+  <label for="description">New description</label>
+  <input type="text" name="description" class = 'form-control' value='<%=@task.description%>' >
+
+  <label for="rank" >New Rank</label>
+  <input type="text" name="rank" class = 'form-control' value="<%=@task.rank%>">
+  <button type="submit">Update Task</button>
+</form>
