@@ -5,6 +5,7 @@ require('sinatra/activerecord')
 require("./lib/task")
 require("./lib/list")
 require("pg")
+require('pry')
 
 
 get('/') do
@@ -43,7 +44,13 @@ patch('/task/:id/edit') do
   description = params['description']
   rank = params['rank'].to_i
   @task.update(:description => description, :rank => rank)
-  list_id = params['list_id'].to_i
-  @list = List.find(list_id)
+  @list = List.find(@task.list.id.to_i)
+  erb(:list)
+end
+
+get('/task/:id/delete') do
+  @task = Task.find(params['id'].to_i)
+  @list = List.find(@task.list.id.to_i)
+  @task.destroy
   erb(:list)
 end
